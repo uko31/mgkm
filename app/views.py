@@ -2,9 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def AppIndex(request):
-    return HttpResponse("This is juste a test")
+    return HttpResponse("Application index view")
 
-def AppAdd(request, app_id):
+def AppAdd(request):
     return HttpResponse("Add an App")
 
 def AppEdit(request, app_id):
