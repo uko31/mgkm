@@ -1,0 +1,8 @@
+# ignore pyc files
+*.pyc
+
+# ignore __pychache__ directories
+__pychache__
+
+# ignore manage.py
+manage.py
