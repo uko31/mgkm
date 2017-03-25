@@ -1,0 +1,10 @@
+<form method="POST" action='{% url "app:index" %}'>
+
+    {%csrf_token%}
+    <label>CCX: </label><input type='text' name='ccx' value='{{app.ccx}}'/><br>
+    <label>Description: </label><textarea name='description'>{{app.description}}</textarea><br>
+
+    <input type="submit" name="action" value="Add">
+    <input type="submit" name="action" value="Cancel">
+
+</form>

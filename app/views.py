@@ -1,31 +1,30 @@
-from django.shortcuts import render
 from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404
 
 from .models import App
 
-def AppIndex(request):
+def index(request):
+    action = ""
+    if request.method == "POST":
+        if ("action" and "ccx") in request.POST:
+            action = "{} - {}".format(request.POST['action'], request.POST['ccx'])
+
     try:
         apps = App.objects.all()
-        html = "Application List:<br><ul>"
-        for app in apps:
-            html += "<li><a href='/app/edit/{}'>{}</a> (<a href='/app/del/{}'>delete</a>)</li>".format(app.ccx, app.ccx, app.ccx)
-        html += "</ul>"
     except:
         raise Http404("Oups!!")
 
-    return HttpResponse(html)
+    return render(request, "app/app_index.html", { 'apps': apps, 'action': action })
 
-def AppAdd(request):
-    return HttpResponse("Add an App")
+def add(request):
+    return render(request, "app/app_form.html")
 
-def AppEdit(request, app_ccx):
-    try:
-        app_ccx = app_ccx.upper()
-        app = App.objects.get(ccx = app_ccx)
-    except:
-        raise Http404("the application '{}' does not exists!".format(app_ccx))
+def edit(request, app_ccx):
+    app = get_object_or_404(App, ccx = app_ccx.upper)
 
-    return HttpResponse("Edit the App: " + app_ccx)
+    return render(request, "app/app_form.html", { 'app': app })
 
-def AppDel(request, app_ccx):
-    return HttpResponse("Are you sure you want to delete the {} application ?".format(app_ccx))
+def delete(request, app_ccx):
+    app = get_object_or_404(App, ccx = app_ccx.upper)
+
+    return render(request, "app/app_delete.html", { 'app': app })

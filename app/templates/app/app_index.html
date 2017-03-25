@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+
+    {% if action %}
+    <p>Action: {{action}}</p>
+    {% endif %}
+
+
+    <a href='{% url "app:add" %}' class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Add a new Application</a>
+    <ul class="list-group">
+    {% for app in apps %}
+
+        <li class="list-group-item">
+            {{app.ccx|upper}} 
+            <a href='{% url "app:edit" app.ccx|upper %}'><i class="glyphicon glyphicon-pencil"></i></a>
+            <a href='{% url "app:delete" app.ccx|upper %}'><i class="glyphicon glyphicon-trash"></i></a>
+        </li>
+
+    {% endfor %}
+    </ul>
+
+{% endblock %}

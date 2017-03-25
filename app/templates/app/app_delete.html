@@ -1,0 +1,9 @@
+<form method="POST" action="/app/">
+
+    {%csrf_token%}
+    <label>Are you sure you want to delete the {{app.ccx}} application? </label><br>
+    <input type="hidden" name="ccx" value="{{app.ccx}}" />
+    <input type="submit" name="action" value="Delete">
+    <input type="submit" name="action" value="Cancel">
+
+</form>
